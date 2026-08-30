@@ -30,6 +30,10 @@ const corsOptions = {
     if (allowedOrigins.indexOf(origin) !== -1) {
       return callback(null, true);
     }
+    // In development, allow any localhost port (avoids CORS breakage when Vite bumps ports)
+    if (process.env.NODE_ENV !== 'production' && /^http:\/\/localhost:\d+$/.test(origin)) {
+      return callback(null, true);
+    }
     // Also allow the known Render frontend
     if (origin === 'https://trustbridge-frontend.onrender.com') {
       return callback(null, true);

@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { listAllUsers, listAllCampaigns, deactivateCampaign, listAllTransactions } from "../models/admin.js";
 import { adminOnly } from "../middleware/admin.js";
+import { authMiddleware } from "../middleware/auth.js";
 
 const router = Router();
 
-router.get("/stats", adminOnly, async (req, res) => {
+router.get("/stats", authMiddleware, adminOnly, async (req, res) => {
   try {
     const users = listAllUsers();
     const campaigns = listAllCampaigns();
@@ -23,7 +24,7 @@ router.get("/stats", adminOnly, async (req, res) => {
   }
 });
 
-router.get("/campaigns", adminOnly, async (req, res) => {
+router.get("/campaigns", authMiddleware, adminOnly, async (req, res) => {
   try {
     const campaigns = listAllCampaigns();
     res.json({ campaigns });
@@ -32,7 +33,7 @@ router.get("/campaigns", adminOnly, async (req, res) => {
   }
 });
 
-router.post("/campaigns/:id/deactivate", adminOnly, async (req, res) => {
+router.post("/campaigns/:id/deactivate", authMiddleware, adminOnly, async (req, res) => {
   try {
     const campaign = deactivateCampaign(Number(req.params.id));
     if (!campaign) return res.status(404).json({ error: "Campaign not found" });

@@ -20,6 +20,7 @@ function serializeUser(user) {
     instagram: user.instagram,
     youtube: user.youtube,
     emailNotifications: user.emailNotifications ?? 1,
+    role: user.role || "user",
     joined: user.created_at,
   };
 }

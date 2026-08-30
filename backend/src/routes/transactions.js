@@ -91,7 +91,7 @@ router.get("/balance-history/:address", async (req, res) => {
       return res.status(500).json({ error: "Failed to fetch account from Horizon" });
     }
     const accountData = await balResp.json();
-    const currentBalance = parseFloat(accountData.balances?.find((b: any) => b.asset_type === 'native')?.balance || '0');
+    const currentBalance = parseFloat(accountData.balances?.find((b) => b.asset_type === 'native')?.balance || '0');
     
     // Get payment operations for this address
     const opsResp = await fetch(`https://horizon.stellar.org/accounts/${address}/payments?limit=200&order=desc`);

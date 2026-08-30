@@ -6,9 +6,7 @@ import { useState, useEffect } from "react";
 import { Heart, MessageSquare, Send, Trash2, ArrowLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { getCampaign, createComment as apiCreateComment, deleteComment as apiDeleteComment } from "@/services/api";
- feat/progress-ring
 import { ProgressRing } from "@/components/ui-bits";
- main
 
 export const Route = createFileRoute("/campaigns/$id")({
   head: () => ({ meta: [{ title: "Campaign — TrustBridge" }] }),
@@ -109,7 +107,6 @@ function CampaignDetail() {
                 </div>
                 {campaign.urgent && <span className="px-2 py-1 rounded-md bg-red-500/10 text-red-400 text-xs font-medium border border-red-500/20">Urgent</span>}
               </div>
- feat/progress-ring
               <div className="mt-6 flex items-center gap-4">
                 <ProgressRing value={pct} size={64} strokeWidth={6} />
                 <div className="flex-1">
@@ -120,14 +117,6 @@ function CampaignDetail() {
                     <span className="font-medium">${raised.toLocaleString()} <span className="text-muted-foreground">of ${goal.toLocaleString()}</span></span>
                     <span className="text-primary font-semibold">{pct}%</span>
                   </div>
-              <div className="mt-6">
-                <div className="h-3 rounded-full bg-white/5 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-brand" style={{ width: `${pct}%` }} />
-                </div>
-                <div className="flex items-center justify-between text-sm mt-2">
-                  <span className="font-medium">${raised.toLocaleString()} <span className="text-muted-foreground">of ${goal.toLocaleString()}</span></span>
-                  <span className="text-primary font-semibold">{pct}%</span>
- main
                 </div>
               </div>
             </div>
